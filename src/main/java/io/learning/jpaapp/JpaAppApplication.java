@@ -35,6 +35,9 @@ public class JpaAppApplication {
 
 //          delete
             repo.delete(book1);
+
+            System.out.println(repo.countAll());
+            System.out.println(repo.getBooksByPriceLessThan(5200.0));
         };
     }
 }
