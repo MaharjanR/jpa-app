@@ -22,11 +22,13 @@ public class Book {
 
     @Column(length=255)
     private String title;
-    private String author;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Author author;
     private String category;
     private Double price;
 
-    public Book(Long isbn, String title, String author, String category, Double price) {
+    public Book(Long isbn, String title, Author author, String category, Double price) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
