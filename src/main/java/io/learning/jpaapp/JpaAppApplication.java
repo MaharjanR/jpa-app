@@ -2,9 +2,11 @@ package io.learning.jpaapp;
 
 import io.learning.jpaapp.domain.Author;
 import io.learning.jpaapp.domain.Book;
+import io.learning.jpaapp.domain.RefData;
 import io.learning.jpaapp.domain.StatusEnum;
 import io.learning.jpaapp.repo.AuthRepo;
 import io.learning.jpaapp.repo.BookRepo;
+import io.learning.jpaapp.repo.RefRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,10 +18,15 @@ import java.util.Date;
 @SpringBootApplication
 public class JpaAppApplication {
 
-    @Autowired
+    RefRepo refRepo;
     BookRepo repo;
-    @Autowired
     AuthRepo authRepo;
+
+    public JpaAppApplication(BookRepo repo, AuthRepo authRepo, RefRepo refRepo) {
+        this.repo = repo;
+        this.authRepo = authRepo;
+        this.refRepo = refRepo;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(JpaAppApplication.class, args);
@@ -53,6 +60,9 @@ public class JpaAppApplication {
 
             System.out.println(repo.countAll());
             System.out.println(repo.getBooksByPriceLessThan(5200.0));
+
+            refRepo.save(new RefData("Apple", "Fruit"));
+            refRepo.save(new RefData("Oranges", "Fruit"));
         };
     }
 }
