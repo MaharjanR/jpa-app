@@ -27,7 +27,7 @@ public class BookService {
         return bookRepo.findAll();
     }
 
-    public Book getBookById(@PathVariable long id) {
+    public Book getBookById(long id) {
         Optional<Book> byId = bookRepo.findById(id);
         if(byId.isPresent()){
             return byId.get();
@@ -36,11 +36,11 @@ public class BookService {
         }
     }
 
-    public Book createBook(@RequestBody Book book){
-        Long id = book.getAuthor().getId();
-        if(!authRepo.findById(id).isPresent()){
-            throw new AuthorNotFoundExceptions("Author is not present");
-        }
+    public Book createBook(Book book){
+//        Long id = book.getAuthor().getId();
+//        if(!authRepo.findById(id).isPresent()){
+//            throw new AuthorNotFoundExceptions("Author is not present");
+//        }
 
         return bookRepo.save(book);
     }
