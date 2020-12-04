@@ -3,6 +3,7 @@ package io.learning.jpaapp;
 import io.learning.jpaapp.domain.Author;
 import io.learning.jpaapp.domain.Book;
 import io.learning.jpaapp.domain.StatusEnum;
+import io.learning.jpaapp.repo.AuthRepo;
 import io.learning.jpaapp.repo.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +18,8 @@ public class JpaAppApplication {
 
     @Autowired
     BookRepo repo;
+    @Autowired
+    AuthRepo authRepo;
 
     public static void main(String[] args) {
         SpringApplication.run(JpaAppApplication.class, args);
@@ -31,6 +34,9 @@ public class JpaAppApplication {
             Author a3= new Author("Saurav", "Intel", null, new Date(), new Date(), StatusEnum.ACTIVE);
 //            Author a4= new Author("Raj", "Samsung", null, new Date(), new Date(), StatusEnum.SUSPENDED);
 
+            authRepo.save(a1);
+            authRepo.save(a2);
+            authRepo.save(a3);
 //          create
             Book book1 = new Book(1231231l, "Learning React", a1, "Programming", 500.0);
             System.out.println(book1);
