@@ -1,6 +1,7 @@
 package io.learning.jpaapp.controller;
 
 import io.learning.jpaapp.domain.ErrorResponse;
+import io.learning.jpaapp.exceptions.AuthorNotFoundExceptions;
 import io.learning.jpaapp.exceptions.BookNotFoundExceptions;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ import java.time.LocalDateTime;
 public class ExceptionController extends ResponseEntityExceptionHandler {
 
 
-    @ExceptionHandler(BookNotFoundExceptions.class)
-    protected ResponseEntity<Object> bookNotFound(BookNotFoundExceptions ex, WebRequest request) {
+    @ExceptionHandler({BookNotFoundExceptions.class, AuthorNotFoundExceptions.class})
+    protected ResponseEntity<Object> bookNotFound(RuntimeException ex, WebRequest request) {
         ErrorResponse response = new ErrorResponse(ex.getMessage(), LocalDateTime.now(), "NOT FOUND");
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
