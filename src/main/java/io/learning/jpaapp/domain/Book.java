@@ -23,7 +23,7 @@ public class Book {
     @Column(length=255)
     private String title;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Author author;
     private String category;
     private Double price;
