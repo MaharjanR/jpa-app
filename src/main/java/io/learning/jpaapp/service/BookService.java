@@ -1,5 +1,6 @@
 package io.learning.jpaapp.service;
 
+import io.learning.jpaapp.domain.Author;
 import io.learning.jpaapp.domain.Book;
 import io.learning.jpaapp.exceptions.AuthorNotFoundExceptions;
 import io.learning.jpaapp.exceptions.BookNotFoundExceptions;
@@ -37,11 +38,13 @@ public class BookService {
     }
 
     public Book createBook(Book book){
-//        Long id = book.getAuthor().getId();
-//        if(!authRepo.findById(id).isPresent()){
-//            throw new AuthorNotFoundExceptions("Author is not present");
-//        }
+        Long id = book.getAuthor().getId();
+        Optional<Author> author = authRepo.findById(id);
 
+        if(!authRepo.findById(id).isPresent()){
+            throw new AuthorNotFoundExceptions("Author is not present");
+        }
+        book.setAuthor(author.get());
         return bookRepo.save(book);
     }
 
