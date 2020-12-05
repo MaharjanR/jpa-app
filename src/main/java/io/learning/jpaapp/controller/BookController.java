@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +27,13 @@ public class BookController {
             @ApiResponse(code = 400, message = "Bad Request", response = ErrorResponse.class)
     })
     @GetMapping
-    public List<Book> getAllBooks(){
-        return service.getAllBooks();
+    public List<Book> getAllBooks( @RequestParam(value= "price", required = false) Double price){
+        System.out.println(price);
+        if(price == null){
+            return service.getAllBooks();
+        }else{
+            return  service.getAllByPrice(price);
+        }
     }
 
 

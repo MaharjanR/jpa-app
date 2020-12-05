@@ -48,4 +48,8 @@ public class BookService {
         return bookRepo.save(book);
     }
 
+    public List<Book> getAllByPrice(double p){
+        return bookRepo.findAllByPrice(p);
+    }
+
 }

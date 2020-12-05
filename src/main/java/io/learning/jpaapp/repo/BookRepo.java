@@ -20,4 +20,7 @@ public interface BookRepo extends JpaRepository<Book, Long> {
 
     @Query(value = "SELECT * FROM table_book WHERE price < :price", nativeQuery = true)
     List<Book> getBooksByPriceLessThan(@Param("price")double price);
+
+    @Query(value = "SELECT * FROM table_book WHERE price >= :price", nativeQuery = true)
+    List<Book> findAllByPrice(@Param("price") double price);
 }
