@@ -2,12 +2,14 @@ package io.learning.jpaapp.controller;
 
 import io.learning.jpaapp.domain.Author;
 import io.learning.jpaapp.service.AuthService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Api(tags = "Author")
+@RestController()
 @RequestMapping("/api/author")
 public class AuthController {
 
