@@ -20,17 +20,29 @@ public class BookController {
     @Autowired
     public BookService service;
 
+
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK", response = Book.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = ErrorResponse.class)
+    })
     @GetMapping
     public List<Book> getAllBooks(){
         return service.getAllBooks();
     }
 
+
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK", response = Book.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = ErrorResponse.class),
+            @ApiResponse(code = 404, message = "Book with ID not found", response = ErrorResponse.class)
+    })
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable long id) {
         return service.getBookById(id);
     }
 
     @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 201, message = "Created", response = Book.class),
             @ApiResponse(code = 400, message = "Bad Request", response = ErrorResponse.class)
     })
@@ -39,6 +51,10 @@ public class BookController {
         return service.createBook(book);
     }
 
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK", response = Book.class),
+            @ApiResponse(code = 400, message = "Bad Request", response = ErrorResponse.class)
+    })
     @PutMapping
     public Book updateBook(@RequestBody Book book){
         return service.createBook(book);
